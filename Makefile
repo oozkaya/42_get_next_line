@@ -13,20 +13,19 @@
 .PHONY: all clean fclean re
 
 NAME = gnl
-FLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 CC = gcc
 
 LIB_PATH = libft
 LIB = $(LIB_PATH)/libft.a
 LIB_LINK = -L $(LIB_PATH) -lft
 
-INC_DIR = ./
-INC_LIB = ./
+INC_DIR = .
+INC_LIB = .
 INCS = -I $(LIB_PATH)/$(INC_LIB) -I $(INC_DIR)
 
-SRC_DIR = src
-SRC = main.c \
-	  get_next_line.c \
+SRC_DIR = ./
+SRC = main.c get_next_line.c \
 
 OBJ_DIR = obj
 
@@ -61,7 +60,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC_DIR)
 clean:
 	@rm -f $(OBJS)
 	@rm -Rf $(OBJ_DIR)
-	@echo "Cleaning all the Fillit objects -> " $(SUCCESS)
+	@echo "Cleaning all the GNL objects -> " $(SUCCESS)
 	@make -C $(LIB_PATH) clean
 
 fclean: clean
