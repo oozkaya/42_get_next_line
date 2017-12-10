@@ -12,8 +12,31 @@
 
 #include "get_next_line.h"
 
+int		ft_check_fd(fd,)
+{
+	t_list	*file;
+	t_list	*tmp;
+	tmp = file;
+	while (file->next)
+	{
+		if (file->fd == fd)
+			return (file);
+		file = file->next;
+	}
+	tmp->fd = fd;
+	tmp->left = 
+	return (0);
+}
+
+t_list	ft_get_fd(fd)
+{
+	if (ft_check_fd(fd))
+
+}
+
 int		get_next_line(const int fd, char **line)
 {
+	
 	int		newlen;
 	int		piece;
 	char	*buff;
