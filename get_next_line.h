@@ -17,14 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-# define BUFF_SIZE 32
-
-typedef struct	s_list
-{
-	int				fd;
-	char			*left;
-	struct s_list	*next;
-}				t_list;
+# define BUFF_SIZE 1
 
 int				get_next_line(const int fd, char **line);
 
