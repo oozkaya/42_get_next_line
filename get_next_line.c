@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-static t_list	*ft_node_browser(t_list **begin, int fd)
+static t_list	*ft_check_fd(t_list **begin, int fd)
 {
 	t_list	*p;
 
@@ -29,61 +29,6 @@ static t_list	*ft_node_browser(t_list **begin, int fd)
 	return (p);
 }
 
-char			*ft_strnjoin(char const *s1, char const *s2, size_t len)
-{
-	char	*s;
-	char	*join;
-
-	//if (!s1 || !s2)
-	//	return (NULL);
-	s = ft_strnew(ft_strlen(s1) + len + 1);
-	join = s;
-	while (*s1)
-		*s++ = *s1++;
-	while (*s2 && len--)
-		*s++ = *s2++;
-	return (join);
-}
-
-char			*ft_strjoinfree(char const *s1, char const *s2, int pick)
-{
-	char	*join;
-
-	//if (pick < 0 || pick > 2)
-	//	return (NULL);
-	join = ft_strjoin(s1, s2);
-	if (pick == 0 || pick == 2)
-		free((char*)s1);
-	if (pick == 1 || pick == 2)
-		free((char*)s2);
-	return (join);
-}
-
-char	*ft_strnjoinfree(char const *s1, char const *s2, size_t len, int pick)
-{
-	char	*join;
-
-	//if (pick < 0 || pick > 2)
-	//	return (NULL);
-	join = ft_strnjoin(s1, s2, len);
-	if (pick == 0 || pick == 2)
-		free((char*)s1);
-	if (pick == 1 || pick == 2)
-		free((char*)s2);
-	return (join);
-}
-
-char	*ft_strndup(char const *s, size_t n)
-{
-	char	*str;
-
-	if (!(str = ft_strnew(n)))
-		return (NULL);
-	str = ft_strncpy(str, s, n);
-	str[n] = '\0';
-	return (str);
-}
-
 int				get_next_line(int const fd, char **line)
 {
 	static t_list	*p;
@@ -95,7 +40,7 @@ int				get_next_line(int const fd, char **line)
 	if (fd < 0 || line == NULL || read(fd, buf, 0) < 0)
 		return (-1);
 	begin = p;
-	p = ft_node_browser(&begin, fd);
+	p = ft_check_fd(&begin, fd);
 	while (!ft_strchr(p->content, '\n') && (ret = read(fd, buf, BUFF_SIZE)))
 		p->content = ft_strnjoinfree(p->content, buf, ret, 0);
 	ret = 0;

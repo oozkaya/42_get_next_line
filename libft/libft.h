@@ -89,5 +89,9 @@ char			*ft_strupr(char *str);
 int				ft_islower(int c);
 int				ft_isupper(int c);
 char			*ft_capitalize(char *str);
+char			*ft_strnjoin(char const *s1, char const *s2, size_t len);
+char			*ft_strjoinfree(char const *s1, char const *s2, int pick);
+char	*ft_strnjoinfree(char const *s1, char const *s2, size_t len, int pick);
+char			*ft_strndup(char const *s, size_t n);
 
 #endif
