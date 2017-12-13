@@ -14,24 +14,24 @@
 
 static t_list	*ft_check_fd(t_list **begin, int fd)
 {
-	t_list	*p;
+	t_list	*file;
 
-	p = *begin;
-	while (p)
+	file = *begin;
+	while (file)
 	{
-		if (fd == (int)p->content_size)
-			return (p);
-		p = p->next;
+		if (fd == (int)file->content_size)
+			return (file);
+		file = file->next;
 	}
-	p = ft_lstnew("\0", 1);
-	p->content_size = fd;
-	ft_lstadd(begin, p);
-	return (p);
+	file = ft_lstnew("\0", 1);
+	file->content_size = fd;
+	ft_lstadd(begin, file);
+	return (file);
 }
 
 int				get_next_line(int const fd, char **line)
 {
-	static t_list	*p;
+	static t_list	*file;
 	char			buf[BUFF_SIZE + 1];
 	int				ret;
 	t_list			*begin;
@@ -39,18 +39,18 @@ int				get_next_line(int const fd, char **line)
 
 	if (fd < 0 || line == NULL || read(fd, buf, 0) < 0)
 		return (-1);
-	begin = p;
-	p = ft_check_fd(&begin, fd);
-	while (!ft_strchr(p->content, '\n') && (ret = read(fd, buf, BUFF_SIZE)))
-		p->content = ft_strnjoinfree(p->content, buf, ret, 0);
+	begin = file;
+	file = ft_check_fd(&begin, fd);
+	while (!ft_strchr(file->content, '\n') && (ret = read(fd, buf, BUFF_SIZE)))
+		file->content = ft_strnjoinfree(file->content, buf, ret, 0);
 	ret = 0;
-	while (((char*)p->content)[ret] && ((char*)p->content)[ret] != '\n')
+	while (((char*)file->content)[ret] && ((char*)file->content)[ret] != '\n')
 		++ret;
-	*line = ft_strndup(p->content, ret);
-	(((char*)p->content)[ret] == '\n') ? ++ret : 0;
-	tmp = p->content;
-	p->content = ft_strdup(tmp + ret);
-	p = begin;
+	*line = ft_strndup(file->content, ret);
+	(((char*)file->content)[ret] == '\n') ? ++ret : 0;
+	tmp = file->content;
+	file->content = ft_strdup(tmp + ret);
 	free(tmp);
+	file = begin;
 	return (ret ? 1 : 0);
 }
