@@ -41,7 +41,8 @@ int				get_next_line(int const fd, char **line)
 		return (-1);
 	begin = file;
 	file = ft_check_fd(&begin, fd);
-	while (!ft_strchr(file->content, '\n') && (ret = read(fd, buf, BUFF_SIZE)))
+	while (!ft_memchr(file->content, '\n', ft_strlen(file->content) + 1)
+			&& (ret = read(fd, buf, BUFF_SIZE)))
 		file->content = ft_strnjoinfree(file->content, buf, ret, 0);
 	ret = 0;
 	while (((char*)file->content)[ret] && ((char*)file->content)[ret] != '\n')
