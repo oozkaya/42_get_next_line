@@ -50,7 +50,7 @@ int				get_next_line(int const fd, char **line)
 	*line = ft_strndup(file->content, ret);
 	(((char*)file->content)[ret] == '\n') ? ++ret : 0;
 	tmp = file->content;
-	file->content = ft_strdup(tmp + ret);
+	file->content = ft_strdup(file->content + ret);
 	free(tmp);
 	file = begin;
 	return (ret ? 1 : 0);
