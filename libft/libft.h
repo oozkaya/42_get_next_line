@@ -6,7 +6,7 @@
 /*   By: oozkaya <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 11:50:59 by oozkaya           #+#    #+#             */
-/*   Updated: 2017/11/23 10:19:00 by oozkaya          ###   ########.fr       */
+/*   Updated: 2017/12/14 08:52:27 by oozkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ int				ft_isupper(int c);
 char			*ft_capitalize(char *str);
 char			*ft_strnjoin(char const *s1, char const *s2, size_t len);
 char			*ft_strjoinfree(char const *s1, char const *s2, int pick);
-char	*ft_strnjoinfree(char const *s1, char const *s2, size_t len, int pick);
+char			*ft_strnjoinfree(char const *s1, char const *s2, size_t len,
+					int pick);
 char			*ft_strndup(char const *s, size_t n);
 
 #endif
