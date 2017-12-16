@@ -37,7 +37,7 @@ int				get_next_line(int const fd, char **line)
 	t_list			*begin;
 	char			*tmp;
 
-	if (fd < 0 || line == NULL || read(fd, buf, 0) < 0)
+	if (fd < 0 || !line || read(fd, buf, 0) < 0 || BUFF_SIZE < 0)
 		return (-1);
 	begin = f;
 	f = ft_check_fd(&begin, fd);
